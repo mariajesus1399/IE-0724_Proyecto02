@@ -1,15 +1,147 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Pet
 from .models import Appointment
 from .forms import PetForm
 from .forms import AppointmentForm
+from django.contrib.auth import logout as do_logout
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as do_login
+from django.contrib.auth.forms import UserCreationForm
+
+def welcome(request):
+    # Si estamos identificados devolvemos la portada
+    if request.user.is_authenticated:
+        return render(request, "welcome.html")
+    # En otro caso redireccionamos al login
+    return redirect('/login')
+
+def register(request):
+    # Creamos el formulario de autenticación vacío
+    form = UserCreationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = UserCreationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+
+            # Creamos la nueva cuenta de usuario
+            user = form.save()
+
+            # Si el usuario se crea correctamente
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/welcome')
+
+    # Si llegamos al final renderizamos el formulario
+    # Si queremos borramos los campos de ayuda
+    form.fields['username'].help_text = None
+    form.fields['password1'].help_text = None
+    form.fields['password2'].help_text = None
+    return render(request, "register.html", {'form': form})
+
+def login(request):
+    # Creamos el formulario de autenticación vacío
+    form = AuthenticationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = AuthenticationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+            # Recuperamos las credenciales validadas
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            # Verificamos las credenciales del usuario
+            user = authenticate(username=username, password=password)
+
+            # Si existe un usuario con ese nombre y contraseña
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/welcome')
+
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "login.html", {'form': form})
+
+def logout(request):
+    # Finalizamos la sesión
+    do_logout(request)
+    # Redireccionamos a la portada
+    return redirect('/login')
 
 def home(request, pk=None):
-    return HttpResponse('Showing "new" page')
+    #return HttpResponse('Showing "new" page')
+    return render(request, "start.html")
 
+def welcome_admin(request):
+    # Si estamos identificados devolvemos la portada
+    if request.user.is_authenticated:
+        return render(request, "welcome_admin.html")
+    # En otro caso redireccionamos al login
+    return redirect('/login_admin')
 
+def register_admin(request):
+    # Creamos el formulario de autenticación vacío
+    form = UserCreationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = UserCreationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+
+            # Creamos la nueva cuenta de usuario
+            user = form.save()
+
+            # Si el usuario se crea correctamente
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/welcome_admin')
+
+    # Si llegamos al final renderizamos el formulario
+    # Si queremos borramos los campos de ayuda
+    form.fields['username'].help_text = None
+    form.fields['password1'].help_text = None
+    form.fields['password2'].help_text = None
+    return render(request, "register_admin.html", {'form': form})
+
+def login_admin(request):
+    # Creamos el formulario de autenticación vacío
+    form = AuthenticationForm()
+    if request.method == "POST":
+        # Añadimos los datos recibidos al formulario
+        form = AuthenticationForm(data=request.POST)
+        # Si el formulario es válido...
+        if form.is_valid():
+            # Recuperamos las credenciales validadas
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            # Verificamos las credenciales del usuario
+            user = authenticate(username=username, password=password)
+
+            # Si existe un usuario con ese nombre y contraseña
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos a la portada
+                return redirect('/welcome_admin')
+
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "login_admin.html", {'form': form})
+
+def logout_admin(request):
+    # Finalizamos la sesión
+    do_logout(request)
+    # Redireccionamos a la portada
+    return redirect('/login_admin')
 
 def show(request, pk=None):
     if pk is not None:
@@ -141,4 +273,3 @@ def new_appointment(request):
                 'appointmentform': new_form,
             }
         )
-  

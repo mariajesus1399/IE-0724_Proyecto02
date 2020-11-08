@@ -27,4 +27,14 @@ urlpatterns = [
     path('show/', views.show, name='show'),
     path('show_appointments/<int:pk>', views.show_appointments, name='show_appointments'),
     path('show/<int:pk>', views.show, name='show'),
+    path('welcome/', views.welcome, name='welcome'),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.logout, name='logout'),
+    path('welcome_admin/', views.welcome_admin, name='welcome_admin'),
+    path('login_admin/', views.login_admin, name='login_admin'),
+    path('register_admin/', views.register_admin, name='register_admin'),
+    path('logout_admin/', views.logout_admin, name='logout_admin'),
+
+
 ]
