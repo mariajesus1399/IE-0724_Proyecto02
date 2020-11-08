@@ -16,6 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from appointments import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('new_appointment/', views.new_appointment, name='new_appointment'),
+    path('show_appointments/', views.show_appointments, name='show_appointments'),
+    path('new/', views.new, name='new'),
+    path('', views.home, name='home'),
+    path('show/', views.show, name='show'),
+    path('show_appointments/<int:pk>', views.show_appointments, name='show_appointments'),
+    path('show/<int:pk>', views.show, name='show'),
 ]

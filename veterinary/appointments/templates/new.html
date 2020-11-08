@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+    <div class="container">
+
+      <h1>Create new Pet object</h1>
+
+      <h2>{{ note }}</h2>
+
+      <form action="{% url 'new' %}" method="post">
+          {% csrf_token %}
+          {% for field in petform %}
+          <div class="form-group">
+
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+
+          </div>
+          {% endfor %}
+
+          <input type="submit" value="New Pet Object">
+      </form>
+
+    </div>

@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+    <div class="container">
+
+      <h1>Create new Appointment object</h1>
+
+      <h2>{{ note }}</h2>
+
+      <form action="{% url 'new_appointment' %}" method="post">
+          {% csrf_token %}
+          {% for field in appointmentform %}
+          <div class="form-group">
+
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+
+          </div>
+          {% endfor %}
+
+          <input type="submit" value="New appointment Object">
+      </form>
+
+    </div>

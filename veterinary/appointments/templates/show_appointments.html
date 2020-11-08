@@ -1,0 +1,22 @@
+
+    {% load widget_tweaks %}
+
+    <div class="container">
+
+      <h1>Appointments</h1>
+      {%if object_pk and object_client %}
+        <h2>
+        This is the page for the appointment for client {{object_client}}  with provider: {{object_provider}}, date: {{object_date}}
+        </h2>
+      {% else %}
+      <h2>List of appointments:</h2>
+      {% for client, values in appointment_dict.items %}
+        <a href="{% url 'show_appointments' values.pk %}">
+            <h3>
+                Appointment for client {{client}} with provider: {{values.provider}}, date: {{values.date}}
+            </h3>
+        </a>
+      {% endfor %}
+      {% endif %}
+
+    </div>
