@@ -11,6 +11,45 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 
+def delete(request, pk=None):
+    # Recuperamos la instancia de la persona y la borramos
+    if pk != None:
+        instancia = Appointment.objects.get(id=pk)
+        instancia.delete()
+    # Después redireccionamos de nuevo a la lista
+    return redirect('/show_appointments')
+
+def edit(request, pk=None):
+    # Recuperamos la instancia de la persona
+    try:
+        instancia = Appointment.objects.get(id=pk)
+    except Appointment.DoesNotExist:
+        raise Http404('pk no existe')
+
+    if pk != None:
+        # Creamos el formulario con los datos de la instancia
+        form = AppointmentForm(instance=instancia)
+
+        # Comprobamos si se ha enviado el formulario
+        if request.method == "POST":
+            # Actualizamos el formulario con los datos recibidos
+            form = AppointmentForm(request.POST, instance=instancia)
+            # Si el formulario es válido...
+            if form.is_valid():
+                # Guardamos el formulario pero sin confirmarlo,
+                # así conseguiremos una instancia para manejarla
+                instancia = form.save(commit=False)
+                # Podemos guardarla cuando queramos
+                instancia.save()
+                note = 'exito'
+                # exito y redigir con render
+        else:
+            note = ''
+    else:
+        raise Http404('Necesita pk')
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "edit.html", {'form': form, 'note':note})
+
 def welcome(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:

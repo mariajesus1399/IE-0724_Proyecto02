@@ -35,6 +35,10 @@ urlpatterns = [
     path('login_admin/', views.login_admin, name='login_admin'),
     path('register_admin/', views.register_admin, name='register_admin'),
     path('logout_admin/', views.logout_admin, name='logout_admin'),
+    # path('show_appointments/edit/<int:persona_id>', views.edit),
+    # path('show_appointments/delete/<int:persona_id>', views.delete),
+    path('edit/<int:pk>', views.edit, name='edit'),
+    path('delete/<int:pk>', views.delete, name='delete'),
 
 
 ]
