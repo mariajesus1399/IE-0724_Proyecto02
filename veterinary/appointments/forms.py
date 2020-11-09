@@ -3,7 +3,7 @@ from .models import Pet
 from .models import Appointment
 
 class PetForm(forms.ModelForm):
-
+    
     class Meta:
         model = Pet
         fields = [
@@ -26,9 +26,11 @@ class AppointmentForm(forms.ModelForm) :
             'date',
             'provider',
             'client',
+            'hour',
         ]
         labels = {
-            'date': 'Date',
+            'date': 'Date [YYYY-MM-DD]',
+            'hour': 'Hour',
             'provider': 'Provider',
             'client': 'Client',
         }

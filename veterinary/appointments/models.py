@@ -6,7 +6,16 @@ GENDERS = [
     ('F', 'Female'),
     ('U', 'Unknown')
 ]
-
+SCHEDULE = [
+    ('9:00', '9:00'),
+    ('10:00', '10:00'),
+    ('11:00', '11:00'),
+    ('12:00', '12:00'),
+    ('13:00', '13:00'),
+    ('14:00', '14:00'),
+    ('15:00', '15:00'),
+    ('16:00', '16:00')
+]
 
 class Pet(models.Model):
     name = models.CharField(max_length=20)
@@ -20,6 +29,7 @@ class User(models.Model):
     name = models.CharField(max_length=30)
 
 class Appointment(models.Model):
-    date = models.CharField(max_length=30)  
-    provider = models.CharField(max_length=30) #Change to diferent field
+    date = models.DateField(null=True)
+    provider = models.CharField(max_length=30) 
     client = models.CharField(max_length=30)
+    hour = models.CharField(max_length=5, choices=SCHEDULE, default='0:00')
