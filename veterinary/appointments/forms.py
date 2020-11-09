@@ -19,7 +19,7 @@ class PetForm(forms.ModelForm):
             'species': 'Species',
         }
 
-class AppointmentForm(forms.ModelForm) :
+class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
         fields = [
