@@ -25,7 +25,7 @@ class Pet(models.Model):
 
 class User(models.Model):
     mail = models.EmailField(max_length = 254) 
-    password = models.CharField(max_length=30) #Change to diferent field
+    password = models.CharField(max_length=30) # Change to diferent field
     name = models.CharField(max_length=30)
 
 class Appointment(models.Model):
@@ -33,3 +33,6 @@ class Appointment(models.Model):
     provider = models.CharField(max_length=30) 
     client = models.CharField(max_length=30)
     hour = models.CharField(max_length=5, choices=SCHEDULE, default='0:00')
+    
+    class Meta:
+        unique_together = ['date', 'provider', 'hour']
