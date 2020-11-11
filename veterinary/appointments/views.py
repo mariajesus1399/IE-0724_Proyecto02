@@ -116,7 +116,7 @@ def logout(request):
 
 def home(request, pk=None):
     #return HttpResponse('Showing "new" page')
-    return render(request, "start.html")
+    return render(request, "home.html")
 
 def welcome_admin(request):
     # Si estamos identificados devolvemos la portada

@@ -10,17 +10,18 @@
 </head>
 <body>
 			<div id="header">
-                    <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
-                    <form method="POST">
-                            {{ form.as_p }}
-                            {% csrf_token %}
-                            <button type="submit">Login</button>
-                        </form>
-                        
-                        <hr />
-                        <a href="/register_admin">Registrar usuario</a>
+	           		<!-- <a href="/index.html" id="logo"><img src= "{% static 'images/logo.gif' %}" width="310" height="114" alt="" title=""></a> -->
+					   <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+					   <ul class="navigation">
+                        <li> Login as </li>
+						<li class="active"><a href="/login">User</a></li>
+						 <li><a href="/login_admin">Admin</li>
+						<!-- <li><a href="/blog.html">Blog</a></li>
+						<li><a href="/petguide.html">PetGuide</a></li>
+						<li><a href="/contact.html">Contact us</a></li> --> 
+					</ul>
             </div>
-             <!-- <div id="body">
+            <div id="body">
 				<div class="banner">&nbsp;</div>
 			       <div id="content">
 				        <div class="content">
@@ -48,4 +49,5 @@
 								</ul>
 						</div>
                 </div>
-            </div> -->
+            </div>
+  
