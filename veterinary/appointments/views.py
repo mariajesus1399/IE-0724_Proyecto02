@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UCFWithEmail, AFWithEmail
+
 
 def delete(request, pk=None):
     # Recuperamos la instancia de la persona y la borramos
@@ -59,10 +61,12 @@ def welcome(request):
 
 def register(request):
     # Creamos el formulario de autenticación vacío
-    form = UserCreationForm()
+    form = UCFWithEmail()
+    # form = UserCreationForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = UserCreationForm(data=request.POST)
+        form = UCFWithEmail(data=request.POST)
+        # form = UserCreationForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
 
@@ -85,10 +89,12 @@ def register(request):
 
 def login(request):
     # Creamos el formulario de autenticación vacío
-    form = AuthenticationForm()
+    form = AFWithEmail()
+    # form = AuthenticationForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
+        form = AFWithEmail(data=request.POST)
+        # form = AuthenticationForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
             # Recuperamos las credenciales validadas
@@ -127,10 +133,13 @@ def welcome_admin(request):
 
 def register_admin(request):
     # Creamos el formulario de autenticación vacío
-    form = UserCreationForm()
+    form = UCFWithEmail()
+
+    # form = UserCreationForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = UserCreationForm(data=request.POST)
+        form = UCFWithEmail(data=request.POST)
+        # form = UserCreationForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
 
@@ -153,10 +162,12 @@ def register_admin(request):
 
 def login_admin(request):
     # Creamos el formulario de autenticación vacío
-    form = AuthenticationForm()
+    form = AFWithEmail()
+    # form = AuthenticationForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
+        form = AFWithEmail(data=request.POST)
+        # form = AuthenticationForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
             # Recuperamos las credenciales validadas

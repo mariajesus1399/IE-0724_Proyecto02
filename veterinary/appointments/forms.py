@@ -1,9 +1,30 @@
 from django import forms
 from .models import Pet
 from .models import Appointment
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+
+# Extendemos del original
+class AFWithEmail(AuthenticationForm):
+    # Ahora el campo username es de tipo email y cambiamos su texto
+    username = forms.EmailField(label="Username (Correo electrónico)")
+
+    class Meta:
+        model = User
+        fields = ["username", "password"]
+
+# Extendemos del original
+class UCFWithEmail(UserCreationForm):
+    # Ahora el campo username es de tipo email y cambiamos su texto
+    username = forms.EmailField(label="Correo electrónico")
+
+    class Meta:
+        model = User
+        fields = ["username", "password1", "password2"]
 
 class PetForm(forms.ModelForm):
-    
+
     class Meta:
         model = Pet
         fields = [
