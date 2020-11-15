@@ -352,7 +352,7 @@ def new(request):
                 )
             )
         else:
-            note = 'INVALID!!!'
+            note = 'INVALIDO!'
         return render(
             request,
             'new.html',
@@ -390,7 +390,7 @@ def new_appointment(request):
             new_ap.save()
             note = (
                 'La cita con el proveedor: \'{}\' ha sido creada con éxito\n'
-                'for client: {}'.format(
+                'para el cliente: {}'.format(
                     new_ap.provider, filled_form.cleaned_data['client']
                 )
             )
