@@ -17,6 +17,13 @@ SCHEDULE = [
     ('16:00', '16:00')
 ]
 
+PROVIDERS = [
+    ('La Vete', 'La Vete'),
+    ('Medipet', 'Medipet'),
+    ('El Establo', 'El Establo'),
+    ('Intensivet', 'Intensivet')
+]
+
 class Pet(models.Model):
     name = models.CharField(max_length=20)
     gender = models.CharField(max_length=1, choices=GENDERS)
@@ -30,7 +37,7 @@ class User(models.Model):
 
 class Appointment(models.Model):
     date = models.DateField(null=True)
-    provider = models.CharField(max_length=30) 
+    provider = models.CharField(max_length=30, choices=PROVIDERS, default='La Vete') 
     client = models.CharField(max_length=30)
     hour = models.CharField(max_length=5, choices=SCHEDULE, default='0:00')
     

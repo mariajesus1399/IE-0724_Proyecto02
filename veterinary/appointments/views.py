@@ -375,9 +375,21 @@ def new_appointment(request):
     if request.method == 'POST':
         filled_form = AppointmentForm(request.POST)
         if filled_form.is_valid():
-            new_ap = filled_form.save()
+            new_ap = filled_form.save(commit=False)
+            for ap in Appointment.objects.all():
+                if new_ap.provider == ap.provider and new_ap.date == ap.date and new_ap.hour == ap.hour:
+                    note = 'Ya hay otra cita con este horario y proveedor\n. Intente de nuevo'
+                    return render(
+                        request,
+                        'new_appointment.html',
+                        {
+                            'appointmentform': filled_form,
+                            'note': note
+                        }
+                    )
+            new_ap.save()
             note = (
-                'Appointment with provider: \'{}\' was successfully created\n'
+                'La cita con el proveedor: \'{}\' ha sido creada con éxito\n'
                 'for client: {}'.format(
                     new_ap.provider, filled_form.cleaned_data['client']
                 )
