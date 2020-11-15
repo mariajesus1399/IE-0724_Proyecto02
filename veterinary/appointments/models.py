@@ -41,5 +41,3 @@ class Appointment(models.Model):
     client = models.CharField(max_length=30)
     hour = models.CharField(max_length=5, choices=SCHEDULE, default='0:00')
     
-    class Meta:
-        unique_together = ['date', 'provider', 'hour']
