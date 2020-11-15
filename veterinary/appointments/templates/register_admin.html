@@ -1,11 +1,25 @@
-<h2>Registrar usuario como administrador</h2>
+<!DOCTYPE html >
+<!--  Website template by freewebsitetemplates.com  -->
+<html>
 
-<form method="POST">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit">Registrar</button>
-</form>
+<head>
+	<title>Pet Shop</title>
+	<meta  charset=iso-8859-1" />
+	{% load static %}
+	<link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+			<div id="header">
+                    <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                    <h2>Create an account as admin</h2>
 
-<hr />
-
-<a href="/login_admin">Iniciar sesión</a>
+                    <form method="POST">
+                        {{ form.as_p }}
+                        {% csrf_token %}
+                        <button type="submit">Create account</button>
+                    </form>
+                    
+                    <hr />
+                    
+                    <a href="/login_admin">Sign in </a>
+            </div>

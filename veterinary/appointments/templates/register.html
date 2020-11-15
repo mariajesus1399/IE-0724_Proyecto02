@@ -1,4 +1,4 @@
-<h2>Registrar usuario</h2>
+<!-- <h2>Registrar usuario</h2>
 
 <form method="POST">
     {{ form.as_p }}
@@ -8,4 +8,30 @@
 
 <hr />
 
-<a href="/login">Iniciar sesión</a>
+<a href="/login">Iniciar sesión</a> -->
+
+<!DOCTYPE html >
+<!--  Website template by freewebsitetemplates.com  -->
+<html>
+
+<head>
+	<title>Pet Shop</title>
+	<meta  charset=iso-8859-1" />
+	{% load static %}
+	<link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+			<div id="header">
+                    <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                    <h2>Create an account</h2>
+
+                    <form method="POST">
+                        {{ form.as_p }}
+                        {% csrf_token %}
+                        <button type="submit">Create account</button>
+                    </form>
+                    
+                    <hr />
+                    
+                    <a href="/login">Sign in</a>
+            </div>

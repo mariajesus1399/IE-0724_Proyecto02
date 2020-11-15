@@ -1,4 +1,4 @@
-{% load widget_tweaks %}
+<!-- {% load widget_tweaks %}
 
     <div class="container">
 
@@ -21,3 +21,38 @@
       </form>
 
     </div>
+
+   -->
+
+
+    <!DOCTYPE html >
+    <!--  Website template by freewebsitetemplates.com  -->
+    <html>
+    
+    <head>
+      <title>Pet Shop</title>
+      <meta  charset=iso-8859-1" />
+      {% load static %}
+      <link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+          <div id="header">
+                        <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                        <h2>Create new Appointment </h2>
+                        <!-- <h2>{{ note }}</h2> -->
+                        <form action="{% url 'new_appointment' %}" method="post">
+                            {% csrf_token %}
+                            {% for field in appointmentform %}
+                            <div class="form-group">
+                  
+                              {{ field.label_tag }}
+                              {% render_field field class="form-control" %}
+                  
+                            </div>
+                            {% endfor %}
+                  
+                            <input type="submit" value="New appointment">
+                            <h2>{{ note }}</h2>
+                            <a href="/welcome">Home</a>
+                        </form>
+                </div>

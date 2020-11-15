@@ -1,4 +1,4 @@
-<h2>Administrador</h2>
+<!-- <h2>Administrador</h2>
 
 <p>
     Bienvenido <b>{{request.user.username}}</b>,
@@ -8,4 +8,66 @@
 <hr />
 <a href="/new_appointment">Agendar Citas</a>
 <a href="/show_appointments">Ver Citas</a>
-<a href="/logout_admin">Cerrar sesión</a>
+<a href="/logout_admin">Cerrar sesión</a> -->
+
+<!DOCTYPE html >
+<!--  Website template by freewebsitetemplates.com  -->
+<html>
+
+<head>
+	<title>Pet Shop</title>
+	<meta  charset=iso-8859-1" />
+	{% load static %}
+	<link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+			<div id="header">
+	           		<!-- <a href="/index.html" id="logo"><img src= "{% static 'images/logo.gif' %}" width="310" height="114" alt="" title=""></a> -->
+					   <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+					   <ul class="navigation">
+						<!-- <li>     Bienvenido </li> -->
+						<li class="active"><a href="/welcome"></a>Home</a></li>
+						<li>Appointments</li>
+						<li><a href="/new_appointment">New</a></li>
+						<li><a href="/show_appointments">Edit</a></li>
+						<li><a href="/show_appointments">Remove</a></li>
+						<li><a href="/logout_admin">Logout</a></li>
+						<!-- <li class="active"><a href="/new_appointment"">Agendar cita</a></li>
+						<li><a href="/user_edit"> Editar </li>
+						<li><a href="/user_remove"> Eliminar </li>
+						<li><a href="/logout"> logout </li> -->
+						<!-- <li><a href="/blog.html">Blog</a></li>
+						<li><a href="/petguide.html">PetGuide</a></li>
+						<li><a href="/contact.html">Contact us</a></li> --> 
+					</ul>
+            </div>
+            <div id="body">
+				<div class="banner">&nbsp;</div>
+			       <div id="content">
+				        <div class="content">
+								<ul>
+									<li>
+										<img src="{% static 'images/la_vete.png' %}"  width="114" height="160" alt="Pet Shop" title="Pet Shop">
+										<h2>La Vete</h2>
+										<p> Alajuela : <br>  8:00 a.m. - 7:00 p.m <br> Escazu : <br> 8:00 a.m. - 7:00 p.m  </p>
+									</li>
+									<li>
+										<img src= "{% static 'images/mp.jpg' %}" width="114" height="160" alt="Pet Shop" title="Pet Shop">
+										<h2>Medi Pet</h2>
+										<p> Sabana  Sur: <br>  8:00 a.m. - 8:00 p.m  </p>
+									</li>
+									<li>
+										<img src="{% static 'images/establo.png' %}"  width="114" height="160" alt="Pet Shop" title="Pet Shop">
+										<h2>El Establo</h2>
+										<p>Alajuela: <br> 10:00 a.m - 6:00 p.m  </p>
+									</li>
+									<li>
+										<a href="index.html"><img src="{% static 'images/intensivet.png' %}"width="114" height="160" alt="Pet Shop" title="Pet Shop"></a>
+										<h2>Intensivet</h2>
+										<p> Los Anonos: <br> 24 horas </p>
+									</li>
+								</ul>
+						</div>
+                </div>
+            </div>
+  

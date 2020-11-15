@@ -1,0 +1,56 @@
+<!-- 
+    {% load widget_tweaks %}
+
+    <div class="container">
+
+      <h2>
+        {% for client, values in appointment_dict.items %}
+            {% if client == values.user %}
+            <h2>List of appointments for user: {{values.user}} </h2>
+            <h3>
+                Appointment with provider: {{values.provider}}
+            </h3>
+            <a href="{% url 'edit' values.pk %}"
+            onClick="return confirm('¿Seguro que quieres editar a {{client}}?');">
+            Editar></a>
+            <a href="{% url 'delete' values.pk %}"
+            onClick="return confirm('¿Seguro que quieres borrar a {{client}}?');">
+            Borrar></a>
+
+        {% endif %}
+        {% endfor %}
+
+      </h2> -->
+
+      <!DOCTYPE html >
+      <!--  Website template by freewebsitetemplates.com  -->
+      <html>
+      
+      <head>
+        <title>Pet Shop</title>
+        <meta  charset=iso-8859-1" />
+        {% load static %}
+        <link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+      </head>
+      <body>
+            <div id="header">
+                          <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                          <h2>
+                            {% for client, values in appointment_dict.items %}
+                                {% if client == values.user %}
+                                <h2>List of appointments for user: {{values.user}} </h2>
+                                <h3>
+                                    Appointment with provider: {{values.provider}}
+                                </h3>
+                                <a href="{% url 'edit' values.pk %}"
+                                onClick="return confirm('¿Seguro que quieres editar a {{client}}?');">
+                                Editar></a>
+                                <a href="{% url 'delete' values.pk %}"
+                                onClick="return confirm('¿Seguro que quieres borrar a {{client}}?');">
+                                Borrar></a>
+                    
+                            {% endif %}
+                            {% endfor %}
+                    
+                          </h2>
+                  </div>

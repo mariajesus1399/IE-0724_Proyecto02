@@ -24,10 +24,17 @@
 	           		<!-- <a href="/index.html" id="logo"><img src= "{% static 'images/logo.gif' %}" width="310" height="114" alt="" title=""></a> -->
 					   <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
 					   <ul class="navigation">
-                        <li>     Bienvenido <b>{{request.user.username}}</b>,
-                            En esta pagina puede agendar su cita. </li>
-						<li class="active"><a href="/new_appointment"">Agendar cita</a></li>
-						 <li><a href="/logout"> logout </li>
+						<!-- <li>     Bienvenido </li> -->
+						<li class="active"><a href="/welcome"></a>Home</a></li>
+						<li>Appointments</li>
+						<li><a href="/new_appointment">New</a></li>
+						<li><a href="/user_edit">Edit</a></li>
+						<li><a href="/user_delete">Remove</a></li>
+						<li><a href="/logout">Logout</a></li>
+						<!-- <li class="active"><a href="/new_appointment"">Agendar cita</a></li>
+						<li><a href="/user_edit"> Editar </li>
+						<li><a href="/user_remove"> Eliminar </li>
+						<li><a href="/logout"> logout </li> -->
 						<!-- <li><a href="/blog.html">Blog</a></li>
 						<li><a href="/petguide.html">PetGuide</a></li>
 						<li><a href="/contact.html">Contact us</a></li> --> 

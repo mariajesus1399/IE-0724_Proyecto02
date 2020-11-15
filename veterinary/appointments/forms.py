@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 # Extendemos del original
 class AFWithEmail(AuthenticationForm):
     # Ahora el campo username es de tipo email y cambiamos su texto
-    username = forms.EmailField(label="Username (Correo electrónico)")
+    username = forms.EmailField(label="Username (email address)")
 
     class Meta:
         model = User
@@ -17,7 +17,7 @@ class AFWithEmail(AuthenticationForm):
 # Extendemos del original
 class UCFWithEmail(UserCreationForm):
     # Ahora el campo username es de tipo email y cambiamos su texto
-    username = forms.EmailField(label="Correo electrónico")
+    username = forms.EmailField(label="Email address")
 
     class Meta:
         model = User

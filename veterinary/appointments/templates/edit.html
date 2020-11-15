@@ -1,9 +1,9 @@
-<form method="POST">
+<!-- <form method="POST">
     {{ form.as_p }}
     {% csrf_token %}
-    <input type="submit" value="New appointment Object">
+    <input type="submit" value="New appointment">
 </form>
-<h2>{{ note }}</h2>
+<h2>{{ note }}</h2> -->
 
 <!-- {% load widget_tweaks %}
 
@@ -28,3 +28,25 @@
       </form>
 
     </div> -->
+
+    <!DOCTYPE html >
+    <!--  Website template by freewebsitetemplates.com  -->
+    <html>
+    
+    <head>
+      <title>Pet Shop</title>
+      <meta  charset=iso-8859-1" />
+      {% load static %}
+      <link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+          <div id="header">
+                        <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                        <form method="POST">
+                          {{ form.as_p }}
+                          {% csrf_token %}
+                          <input type="submit" value="New appointment">
+                      </form>
+                      <a href="/welcome">Home</a>
+                      <h2>{{ note }}</h2>
+                </div>

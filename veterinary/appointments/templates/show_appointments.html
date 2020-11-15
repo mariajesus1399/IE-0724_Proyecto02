@@ -1,4 +1,4 @@
-
+<!-- 
     {% load widget_tweaks %}
 
     <div class="container">
@@ -16,8 +16,8 @@
                 Appointment for client {{client}} with provider: {{values.provider}}
             </h3>
 
-            <!-- <a href="/edit/{{ persona.id }}">Editar</a> -->
-            <a href="{% url 'edit' values.pk %}"
+             <a href="/edit/{{ persona.id }}">Editar</a> -->
+            <!-- <a href="{% url 'edit' values.pk %}"
             onClick="return confirm('¿Seguro que quieres editar a {{client}}?');">
             Editar></a>
             <a href="{% url 'delete' values.pk %}"
@@ -30,4 +30,49 @@
       {% endfor %}
       {% endif %}
 
-    </div>
+    </div> --> 
+
+
+
+
+<!DOCTYPE html >
+<!--  Website template by freewebsitetemplates.com  -->
+<html>
+
+<head>
+	<title>Pet Shop</title>
+	<meta  charset=iso-8859-1" />
+	{% load static %}
+	<link href= "{% static 'appointments/style.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+			<div id="header">
+                    <img src="{% static 'images/logo.png' %}" width="310" height="170" alt="" title="">
+                    <h1>Appointments</h1>
+                    {%if object_pk and object_client %}
+                      <h2>
+                      This is the page for the appointment for client {{object_client}}  with provider: {{object_provider}}
+                      </h2>
+                    {% else %}
+                    <h2>List of appointments:</h2>
+                    {% for client, values in appointment_dict.items %}
+                      <!-- <a href="{% url 'show_appointments' values.pk %}"> -->
+                          <h3>
+                              Appointment for client {{client}} with provider: {{values.provider}}
+                          </h3>
+              
+                          <!-- <a href="/edit/{{ persona.id }}">Editar</a> -->
+                          <a href="{% url 'edit' values.pk %}"
+                          onClick="return confirm('¿Seguro que quieres editar a {{client}}?');">
+                          Editar></a>
+                          <a href="{% url 'delete' values.pk %}"
+                          onClick="return confirm('¿Seguro que quieres borrar a {{client}}?');">
+                          Borrar></a>
+              
+              
+              
+                      </a>
+                    {% endfor %}
+                    {% endif %}
+              
+            </div>

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Pet
 from .models import Appointment
+from .models import User
 from .forms import PetForm
 from .forms import AppointmentForm
 from django.contrib.auth import logout as do_logout
@@ -19,8 +20,83 @@ def delete(request, pk=None):
         instancia = Appointment.objects.get(id=pk)
         instancia.delete()
     # Después redireccionamos de nuevo a la lista
-    return redirect('/show_appointments')
+    return redirect('/welcome')
 
+def user_delete(request, pk=None):
+    if request.user.is_authenticated:
+        user = request.user.username
+    if pk is not None:
+        try:
+            ap = Appointment.objects.get(pk=pk)
+        except ap.DoesNotExist:
+            raise Http404('Appointment with pk {} doesn\'t exist!!!'.format(pk))
+
+        return render(
+            request,
+            'user_delete.html',
+            {
+                'object_pk': ap.pk,
+                'object_client': ap.client,
+                'object_provider': ap.provider,
+                'object_date': ap.date,
+                'object_user': user,
+            }
+        )
+    else:
+        # Create a metadata dictionary
+        appointment_dict = {}
+        for ap in Appointment.objects.all():
+             appointment_dict[ap.client] = {
+                'pk': ap.pk,
+                'provider': ap.provider,
+                'date': ap.date,
+                'user': user,
+            }
+        return render(
+            request,
+            'user_delete.html',
+            {
+                'appointment_dict': appointment_dict,
+            }
+        )
+
+def user_edit(request, pk=None):
+    if request.user.is_authenticated:
+        user = request.user.username
+    if pk is not None:
+        try:
+            ap = Appointment.objects.get(pk=pk)
+        except ap.DoesNotExist:
+            raise Http404('Appointment with pk {} doesn\'t exist!!!'.format(pk))
+
+        return render(
+            request,
+            'user_edit.html',
+            {
+                'object_pk': ap.pk,
+                'object_client': ap.client,
+                'object_provider': ap.provider,
+                'object_date': ap.date,
+                'object_user': user,
+            }
+        )
+    else:
+        # Create a metadata dictionary
+        appointment_dict = {}
+        for ap in Appointment.objects.all():
+             appointment_dict[ap.client] = {
+                'pk': ap.pk,
+                'provider': ap.provider,
+                'date': ap.date,
+                'user': user,
+            }
+        return render(
+            request,
+            'user_edit.html',
+            {
+                'appointment_dict': appointment_dict,
+            }
+        )
 def edit(request, pk=None):
     # Recuperamos la instancia de la persona
     try:
@@ -43,7 +119,7 @@ def edit(request, pk=None):
                 instancia = form.save(commit=False)
                 # Podemos guardarla cuando queramos
                 instancia.save()
-                note = 'exito'
+                note = ('Appointment was successfully edited\n')
                 # exito y redigir con render
         else:
             note = ''
@@ -51,6 +127,7 @@ def edit(request, pk=None):
         raise Http404('Necesita pk')
     # Si llegamos al final renderizamos el formulario
     return render(request, "edit.html", {'form': form, 'note':note})
+
 
 def welcome(request):
     # Si estamos identificados devolvemos la portada
