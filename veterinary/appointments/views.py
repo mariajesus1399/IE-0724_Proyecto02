@@ -309,7 +309,7 @@ def show_appointments(request, pk=None):
         try:
             ap = Appointment.objects.get(pk=pk)
         except ap.DoesNotExist:
-            raise Http404('Appointment with pk {} doesn\'t exist!!!'.format(pk))
+            raise Http404('Appointment with pk {} doesn\'t exist!'.format(pk))
 
         return render(
             request,
@@ -346,7 +346,7 @@ def new(request):
         if filled_form.is_valid():
             new_pet = filled_form.save()
             note = (
-                'Pet object with pk: \'{}\' was successfully created!!!\n'
+                'Pet object with pk: \'{}\' was successfully created!\n'
                 'Name: {}'.format(
                     new_pet.pk, filled_form.cleaned_data['name']
                 )
@@ -378,7 +378,7 @@ def new_appointment(request):
             new_ap = filled_form.save(commit=False)
             for ap in Appointment.objects.all():
                 if new_ap.provider == ap.provider and new_ap.date == ap.date and new_ap.hour == ap.hour:
-                    note = 'Ya hay otra cita con este horario y proveedor\n. Intente de nuevo'
+                    note = 'There is already an appointment for this date, hour and provider\n. Please try again'
                     return render(
                         request,
                         'new_appointment.html',
@@ -389,8 +389,8 @@ def new_appointment(request):
                     )
             new_ap.save()
             note = (
-                'La cita con el proveedor: \'{}\' ha sido creada con éxito\n'
-                'para el cliente: {}'.format(
+                'The appointment with provider: \'{}\' has been created\n'
+                'for client: {}'.format(
                     new_ap.provider, filled_form.cleaned_data['client']
                 )
             )
